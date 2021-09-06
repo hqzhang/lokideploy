@@ -1,0 +1,25 @@
+#!/bin/bash
+# execute loki with grafana
+set -x
+
+app=grafana-app  
+corp=wavecloud
+tag=v1.0  
+img=$corp/$app:$tag
+
+echo "build loki image"
+docker build -f ${app}.df -t $corp/$app:$tag .
+
+docker rm -f $app
+docker run -dt --name $app -p 127.0.0.1:3000:3000 \
+           $corp/$app:$tag
+sleep 3
+exit 1;
+echo "run docker image"
+app=loki-app
+docker build -f ${app}.df -t $corp/$app:$tag .
+docker rm -f $app
+docker rm -f ${app}
+docker run -dt --name ${app} --network host \
+           $corp/$app:$tag 
+      

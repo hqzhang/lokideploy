@@ -1,0 +1,4 @@
+#!/bin/bash
+set -x
+echo "start loki...."
+./loki-linux-amd64 -config.file=loki-local-config.yaml

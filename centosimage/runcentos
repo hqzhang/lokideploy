@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -x
+dir=loki/clients/cmd/fluent-bit
+tag=v1.0
+corp=wavecloud
+
+app=centos-app    
+img=$corp/$app:$tag
+echo "build centos image"
+#docker build --rm -t c7-systemd 
+docker build --rm -f ${app}.df -t ${img} .
+sleep 3
+
+echo "run cents inside docker image"
+docker rm -f $app
+docker run -itd --name $app  --privileged  \
+          -p 127.0.0.1:3000:3000           \
+          -p 127.0.0.1:3100:3100 ${img}

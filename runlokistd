@@ -1,0 +1,24 @@
+#!/bin/bash
+# execute loki with grafana
+set -x
+
+app=grafana-loki-app  
+corp=wavecloud
+tag=v1.0  
+img=$corp/$app:$tag
+
+echo "build loki image"
+docker build -f ${app}.df -t $corp/$app:$tag .
+sleep 3
+
+echo "run docker image"
+docker rm -f $app
+docker rm -f ${app}1
+docker run -dt --name $app -p 127.0.0.1:3000:3000 \
+           -e LOKI_URL=http://192.168.0.43:3100/loki/api/v1/push  \
+           $corp/$app:$tag  
+docker run -dt --name ${app}1  \
+           -p 127.0.0.1:3100:3100   \
+           -e LOKI_URL=http://192.168.0.43:3100/loki/api/v1/push  \
+           $corp/$app:$tag ./loki-linux-amd64 -config.file=./loki-local-config.yaml 
+      
