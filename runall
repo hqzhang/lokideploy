@@ -1,6 +1,13 @@
 #!/bin/bash
 set -x
+#wget https://dl.grafana.com/enterprise/release/grafana-enterprise-8.0.2.linux-amd64.tar.gz
+#curl -O -L "https://github.com/grafana/loki/releases/download/v2.2.1/promtail-linux-amd64.zip"
+#curl -O -L "https://github.com/grafana/loki/releases/download/v2.2.1/loki-linux-amd64.zip
+#tar -xvf grafana-enterprise-8.0.2.linux-amd64.tar.gz
+#unzip loki-linux-amd64.zip
+#unzip promtail-linux-amd64.zip
 echo "start grafana...."
+rm -rf grafana-8.0.3
 cd grafana-8.0.3/bin
 ./grafana-server &
 cd ../..
