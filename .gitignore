@@ -1,0 +1,5 @@
+grafana-8.2.0/bin/grafana-server
+grafana-8.2.0/bin/grafana-cli
+loki-linux-amd64
+promtail-linux-amd64
+
