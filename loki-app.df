@@ -1,12 +1,11 @@
-# syntax=docker/dockerfile:1
 FROM centos:7
 
 WORKDIR /lokideploy
 
-RUN yum -y install net-tools 
-
-COPY . /lokideploy/
+COPY loki-local-config.yaml .
+COPY loki-linux-amd64  .
 
 EXPOSE 3100
 
-CMD ["/lokideploy/loki-linux-amd64","-config.file=/lokideploy/loki-local-config.yaml"]
+CMD ["./loki-linux-amd64","-config.file=loki-local-config.yaml"]
+

@@ -1,0 +1,15 @@
+#!/bin/bash
+# execute fluent-bit with loki plugins
+set -x
+host=127.0.0.1
+port=3100
+target=192.168.0.43
+app=loki-app
+echo "build loki app..."
+docker build -f ${app}.df -t $app .
+
+echo "run fluent-bit inside docker ..."
+docker rm -f $app
+docker run -it --name $app -p ${host}:${port}:${port} \
+           $app
+

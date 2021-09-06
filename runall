@@ -1,0 +1,13 @@
+#!/bin/bash
+set -x
+echo "start grafana...."
+cd grafana-8.0.3/bin
+./grafana-server &
+cd ../..
+#!/bin/bash
+set -x
+echo "start loki...."
+
+./loki-linux-amd64 -config.file=loki-local-config.yaml &
+echo "starat promtail..."
+./promtail-linux-amd64 -config.file=promtail-local-config.yaml
