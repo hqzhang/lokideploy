@@ -6,7 +6,8 @@ WORKDIR /lokideploy
 RUN yum -y install net-tools 
 RUN yum -y install nc
 
-COPY . /lokideploy/
+COPY grafana-8.0.3  grafana-8.0.3
+RUN ls -al /lokideploy/grafana-8.0.3/bin
 
 EXPOSE 3000
 CMD ["./rungrafana" ]

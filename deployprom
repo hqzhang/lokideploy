@@ -1,0 +1,4 @@
+docker rm -f promtail
+docker run -it --name promtail -v $(pwd):/mnt/config -v /var/log:/var/log grafana/promtail:2.2.1 \
+           -config.file=/mnt/config/promtail-docker-config.yaml
+
